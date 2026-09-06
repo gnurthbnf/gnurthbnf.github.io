@@ -6,7 +6,7 @@
     <title>gnurthbnf | Portfolio</title>
     <!-- Google Fonts & Font Awesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
@@ -37,11 +37,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 24px 16px;
+            padding: 40px 16px;
             overflow-x: hidden;
         }
 
-        /* Container chính với hiệu ứng xuất hiện ban đầu */
+        /* Container chính */
         .wrapper {
             width: 100%;
             max-width: 640px;
@@ -109,7 +109,7 @@
             margin: 0 auto;
         }
 
-        /* Thẻ liên kết với hiệu ứng nhún iOS */
+        /* Thẻ liên kết */
         .links-grid {
             display: flex;
             flex-direction: column;
@@ -157,10 +157,17 @@
             color: #fff;
         }
 
-        .bg-github { background: linear-gradient(135deg, #333, #111); }
-        .bg-facebook { background: linear-gradient(135deg, #1877f2, #0056b3); }
-        .bg-mail { background: linear-gradient(135deg, #ea4335, #c5221f); }
+        /* Màu nền gradient biểu tượng các mạng xã hội */
         .bg-info { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+        .bg-github { background: linear-gradient(135deg, #333333, #111111); }
+        .bg-facebook { background: linear-gradient(135deg, #1877f2, #0056b3); }
+        .bg-tiktok { background: linear-gradient(135deg, #000000, #25f4ee, #fe2c55); }
+        .bg-bluesky { background: linear-gradient(135deg, #0085ff, #0051c6); }
+        .bg-reddit { background: linear-gradient(135deg, #ff4500, #cc3700); }
+        .bg-youtube { background: linear-gradient(135deg, #ff0000, #b30000); }
+        .bg-instagram { background: linear-gradient(135deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888); }
+        .bg-threads { background: linear-gradient(135deg, #101010, #262626); }
+        .bg-mail { background: linear-gradient(135deg, #ea4335, #c5221f); }
 
         .link-text {
             flex-grow: 1;
@@ -189,7 +196,7 @@
             transform: translateX(4px);
         }
 
-        /* Modal / Sheet hiệu ứng mượt kiểu iOS */
+        /* Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -252,7 +259,6 @@
             transform: rotate(90deg);
         }
 
-        /* Keyframes Animation */
         @keyframes iosFadeIn {
             from {
                 opacity: 0;
@@ -275,7 +281,7 @@
 <body>
 
     <div class="wrapper">
-        <!-- Thẻ hồ sơ cá nhân -->
+        <!-- Profile Card -->
         <div class="profile-card">
             <div class="avatar-wrapper">
                 <div class="avatar">
@@ -289,8 +295,9 @@
             </p>
         </div>
 
-        <!-- Danh sách liên kết với hiệu ứng vuốt chạm -->
+        <!-- Links Grid -->
         <div class="links-grid">
+            <!-- Thông tin chi tiết -->
             <div class="link-item" onclick="openModal()">
                 <div class="icon-box bg-info">
                     <i class="fa-solid fa-user"></i>
@@ -302,6 +309,7 @@
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </div>
 
+            <!-- GitHub -->
             <a href="https://github.com/gnurthbnf" target="_blank" class="link-item">
                 <div class="icon-box bg-github">
                     <i class="fa-brands fa-github"></i>
@@ -313,24 +321,98 @@
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </a>
 
-            <a href="#" class="link-item">
+            <!-- Facebook -->
+            <a href="https://facebook.com/gnurthieu1230" target="_blank" class="link-item">
                 <div class="icon-box bg-facebook">
                     <i class="fa-brands fa-facebook-f"></i>
                 </div>
                 <div class="link-text">
                     <div class="link-title">Facebook</div>
-                    <div class="link-desc">https://facebook.com/gnurthieu1230</div>
+                    <div class="link-desc">facebook.com/gnurthieu1230</div>
                 </div>
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </a>
 
-            <a href="mailto: gnurthieu1230@gmail.com" class="link-item">
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@username_cua_ban" target="_blank" class="link-item">
+                <div class="icon-box bg-tiktok">
+                    <i class="fa-brands fa-tiktok"></i>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">TikTok</div>
+                    <div class="link-desc">Theo dõi video ngắn của tớ</div>
+                </div>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+            <!-- Bluesky -->
+            <a href="https://bsky.app/profile/gnurthbnf.bsky.social" target="_blank" class="link-item">
+                <div class="icon-box bg-bluesky">
+                    <i class="fa-solid fa-cloud"></i>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">Bluesky</div>
+                    <div class="link-desc">Kết nối trên Bluesky Social</div>
+                </div>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+            <!-- Reddit -->
+            <a href="https://reddit.com/u/gnurthieu1230" target="_blank" class="link-item">
+                <div class="icon-box bg-reddit">
+                    <i class="fa-brands fa-reddit-alien"></i>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">Reddit</div>
+                    <div class="link-desc">Cộng đồng & thảo luận</div>
+                </div>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://youtube.com/@gnurthieu1230" target="_blank" class="link-item">
+                <div class="icon-box bg-youtube">
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">YouTube</div>
+                    <div class="link-desc">Xem các nội dung video</div>
+                </div>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/gnurthbnf.exe" target="_blank" class="link-item">
+                <div class="icon-box bg-instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">Instagram</div>
+                    <div class="link-desc">Hình ảnh & khoảnh khắc</div>
+                </div>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+            <!-- Threads -->
+            <a href="https://threads.net/@gnurthbnf.exe" target="_blank" class="link-item">
+                <div class="icon-box bg-threads">
+                    <i class="fa-brands fa-threads"></i>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">Threads</div>
+                    <div class="link-desc">Chia sẻ khoảnh khắc thường ngày</div>
+                </div>
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:gnurthieu1230@gmail.com" class="link-item">
                 <div class="icon-box bg-mail">
                     <i class="fa-solid fa-envelope"></i>
                 </div>
                 <div class="link-text">
-                    <div class="link-title">Liên hệ Email</div>
-                    <div class="link-desc">Gửi phản hồi hoặc công việc</div>
+                    <div class="link-title">Email</div>
+                    <div class="link-desc">gnurthieu1230@gmail.com</div>
                 </div>
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </a>
@@ -341,7 +423,7 @@
         </footer>
     </div>
 
-    <!-- Modal bung nở chuẩn iOS Animation -->
+    <!-- Modal -->
     <div class="modal-overlay" id="infoModal" onclick="closeModalOnOutside(event)">
         <div class="modal-card">
             <div class="modal-header">
@@ -351,7 +433,7 @@
             <div style="line-height: 1.6; color: var(--text-sub); font-size: 0.95rem;">
                 <p>Chào mừng bạn đã ghé thăm trang cá nhân của tớ!</p>
                 <br>
-                <p>✨ Trang web này được tối ưu hiệu ứng **Spring Physics** cho các tương tác di chuột, ấn giữ và mở hộp thoại.</p>
+                <p>✨ Trang web sử dụng hiệu ứng Spring Physics tạo trải nghiệm phản hồi mượt mà cho các tương tác di chuột, ấn giữ và chuyển cảnh.</p>
             </div>
         </div>
     </div>
