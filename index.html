@@ -1,20 +1,322 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Trang web của gnurthbnf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>gnurthbnf OS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f2f5;
-            padding-top: 50px;
+        :root {
+            --ios-bg: #000000;
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-color: #ffffff;
         }
-        h1 { color: #007bff; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--ios-bg);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Khung Mockup iPhone */
+        .iphone-frame {
+            width: 100%;
+            max-width: 390px;
+            height: 100vh;
+            max-height: 844px;
+            background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
+            border-radius: 0px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (min-width: 500px) {
+            .iphone-frame {
+                height: 92vh;
+                border-radius: 48px;
+                border: 12px solid #2d2d2d;
+            }
+        }
+
+        /* Dynamic Island */
+        .dynamic-island {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 30px;
+            background-color: #000;
+            border-radius: 20px;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Màn hình chính (Home Screen) */
+        .home-screen {
+            padding: 60px 20px 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Widget Đồng hồ */
+        .widget-clock {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 20px;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .widget-clock .time {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .widget-clock .date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        /* Grid ứng dụng */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px 15px;
+        }
+
+        .app-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .app-item:active {
+            transform: scale(0.9);
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 26px;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .app-name {
+            color: #fff;
+            font-size: 0.75rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* Màu nền Icon chuẩn iOS Style */
+        .bg-github { background: linear-gradient(135deg, #24292e, #040404); }
+        .bg-facebook { background: linear-gradient(135deg, #1877f2, #0056b3); }
+        .bg-mail { background: linear-gradient(135deg, #ff9500, #ff5e00); }
+        .bg-profile { background: linear-gradient(135deg, #34c759, #11998e); }
+
+        /* Dock bên dưới */
+        .dock {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 30px;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        /* Window App khi mở */
+        .app-window {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 500;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .app-window.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .app-header {
+            padding: 50px 20px 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-header h2 {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .close-btn {
+            background: #e4e6eb;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .app-content {
+            padding: 20px;
+            overflow-y: auto;
+            color: #333;
+            flex: 1;
+        }
+
+        /* Thanh Home Bar dưới cùng */
+        .home-bar {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 5px;
+            background-color: #ffffff;
+            border-radius: 3px;
+            z-index: 1001;
+        }
     </style>
 </head>
 <body>
-    <h1>Xin chào! Tớ là gnurthbnf.</h1>
-    <p>Trang web đầu tiên của tớ đã hoạt động rồi nè!</p>
+
+    <div class="iphone-frame">
+        <div class="dynamic-island"></div>
+
+        <div class="home-screen">
+            <div>
+                <div class="widget-clock">
+                    <div class="time" id="clock">00:00</div>
+                    <div class="date" id="date">Đang tải...</div>
+                </div>
+
+                <div class="app-grid">
+                    <div class="app-item" onclick="openApp('profileApp')">
+                        <div class="app-icon bg-profile"><i class="fa-solid fa-user"></i></div>
+                        <span class="app-name">Hồ sơ</span>
+                    </div>
+
+                    <a href="https://github.com/gnurthbnf" target="_blank" class="app-item" style="text-decoration: none;">
+                        <div class="app-icon bg-github"><i class="fa-brands fa-github"></i></div>
+                        <span class="app-name">GitHub</span>
+                    </a>
+
+                    <a href="#" class="app-item" style="text-decoration: none;">
+                        <div class="app-icon bg-facebook"><i class="fa-brands fa-facebook-f"></i></div>
+                        <span class="app-name">Facebook</span>
+                    </a>
+
+                    <a href="mailto:your-email@gmail.com" class="app-item" style="text-decoration: none;">
+                        <div class="app-icon bg-mail"><i class="fa-solid fa-envelope"></i></div>
+                        <span class="app-name">Mail</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="dock">
+                <div class="app-item" onclick="openApp('profileApp')">
+                    <div class="app-icon bg-profile" style="margin:0;"><i class="fa-solid fa-address-card"></i></div>
+                </div>
+                <a href="https://github.com/gnurthbnf" target="_blank" class="app-item">
+                    <div class="app-icon bg-github" style="margin:0;"><i class="fa-brands fa-github"></i></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="app-window" id="profileApp">
+            <div class="app-header">
+                <h2>Thông tin cá nhân</h2>
+                <button class="close-btn" onclick="closeApp('profileApp')">✕</button>
+            </div>
+            <div class="app-content">
+                <div style="text-align: center; padding: 20px 0;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: #007aff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 35px; margin: 0 auto 15px;">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3>gnurthbnf</h3>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 5px;">Developer & Creator</p>
+                </div>
+                <hr style="border: none; border-top: 1px solid #eee; margin: 15px 0;">
+                <p><strong>Giới thiệu:</strong> Chào mừng bạn đến với không gian cá nhân của gnurthbnf. Được mô phỏng theo giao diện iOS mượt mà!</p>
+            </div>
+        </div>
+
+        <div class="home-bar"></div>
+    </div>
+
+    <script>
+        // Cập nhật đồng hồ thời gian thực
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('clock').innerText = `${hours}:${minutes}`;
+
+            const options = { weekday: 'long', month: 'numeric', day: 'numeric' };
+            document.getElementById('date').innerText = now.toLocaleDateString('vi-VN', options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Hiệu ứng Mở / Đóng App
+        function openApp(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeApp(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+    </script>
 </body>
 </html>
